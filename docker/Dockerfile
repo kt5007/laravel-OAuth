@@ -4,7 +4,12 @@ RUN \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure mysqli --with-mysqli=mysqlnd --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-install mysqli \
-    && docker-php-ext-install pdo_mysql 
+    && docker-php-ext-install pdo_mysql
+RUN apt-get update
+RUN apt-get install -y \
+        libzip-dev \
+        zip \
+        && docker-php-ext-install zip
 
 # composerのインストール
 RUN curl -sS https://getcomposer.org/installer | php
