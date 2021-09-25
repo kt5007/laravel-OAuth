@@ -19,5 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('social-auth/{provider}/callback',[SocialLoginController::class,'providerCallback']);
-Route::get('social-auth/{provider}',[SocialLoginController::class,'redirectToProvider'])->name('social.redirect');
+// Route::get('social-auth/{provider}/callback','SocialLoginController@providerCallback');
+// Route::get('social-auth/{provider}','SocialLoginController@redirectToProvider')->name('social.redirect');
+
+// GitHubの認証後に戻るためのルーティング
+Route::get('social-auth/{provider}/callback','Auth\SocialLoginController@providerCallback');
+// GitHubの認証ベージに遷移するためのルーティング
+Route::get('social-auth/{provider}','Auth\SocialLoginController@redirectToProvider')->name('social.redirect');
